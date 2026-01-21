@@ -32,10 +32,10 @@
   <ul class="divide-y divide-slate-200 rounded-xl border border-slate-200/70 bg-white">
     {#each itemState.itemsForCategory(categoryId) as item}
       <li class="px-2 pb-2 pt-2">
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div class="flex items-start gap-2">
           <button
             type="button"
-            class="flex min-w-0 flex-1 flex-col gap-2 rounded-lg px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-indigo-50/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 sm:flex-row sm:items-center sm:justify-between"
+            class="flex min-w-0 flex-1 flex-col gap-2 rounded-lg px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-indigo-50/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300"
             onclick={() => selectionState.selectItem(item.id)}
           >
             <span class="min-w-0 truncate font-medium text-slate-800">{item.name}</span>
@@ -60,7 +60,7 @@
         
           <button
             type="button"
-            class="inline-flex self-start items-center justify-center rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold text-rose-600 transition hover:border-rose-200 hover:bg-rose-50 sm:self-auto"
+            class="inline-flex self-start items-center justify-center rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold text-rose-600 transition hover:border-rose-200 hover:bg-rose-50"
             onclick={() => remove(item.id)}
           >
             Poista
