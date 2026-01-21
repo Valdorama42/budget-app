@@ -1,4 +1,8 @@
-let transactions = $state([
+import { browser } from "$app/environment";
+
+const storageKey = "budget-app:transactions";
+
+const defaultTransactions = [
     { id: "t1", date: "2026-01-02", amount: 45.60, note: "K-Market", itemId: "i1" },
     { id: "t2", date: "2026-01-05", amount: 32.10, note: "Prisma", itemId: "i1" },
     { id: "t3", date: "2026-01-09", amount: 54.20, note: "Lidl", itemId: "i1" },
@@ -25,7 +29,23 @@ let transactions = $state([
     { id: "t24", date: "2026-01-02", amount: 9.90, note: "Sanomalehti", itemId: "i24" },
     { id: "t25", date: "2026-01-09", amount: 8.50, note: "Pesuaineet", itemId: "i25" },
     { id: "t26", date: "2026-01-03", amount: 150.00, note: "Säästöön", itemId: "i28" }
-  ]);
+  ];
+
+let initialTransactions = defaultTransactions;
+
+if (browser && localStorage.getItem(storageKey) != null) {
+    try {
+        initialTransactions = JSON.parse(localStorage.getItem(storageKey));
+    } catch {
+        initialTransactions = defaultTransactions;
+    }
+}
+
+let transactions = $state(initialTransactions);
+
+const saveTransactions = () => {
+    localStorage.setItem(storageKey, JSON.stringify(transactions));
+};
 
 const useTransactionState = () => {
     return {
@@ -49,10 +69,12 @@ const useTransactionState = () => {
                 },
                 ...transactions
             ];
+            saveTransactions();
         },
 
         removeTransaction: (id) => {
             transactions = transactions.filter(t => t.id !== id);
+            saveTransactions();
         },
 
         totalSpentForItem: (itemId) => {

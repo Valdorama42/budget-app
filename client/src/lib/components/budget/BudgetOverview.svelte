@@ -8,7 +8,8 @@
     <div>
       <div class="text-md font-semibold uppercase tracking-[0.2em] text-indigo-600">Budjetti</div>
       <h1 class="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">{monthLabel}</h1>
-      <div class="text-sm text-slate-500">Prototyyppi · paikallinen</div>
+      <div class="text-sm text-slate-500">Prototyyppi</div>
+      <div class="mt-1 text-xs text-slate-400">Demo-data · esimerkkiluvut</div>
     </div>
     
     <!-- Remaining budget -->

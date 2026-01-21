@@ -1,4 +1,8 @@
-let items = $state([
+import { browser } from "$app/environment";
+
+const storageKey = "budget-app:items";
+
+const defaultItems = [
     { id: "i1", name: "Ruokakauppa", categoryId: "c1", planned: 240 },
     { id: "i2", name: "Ravintola", categoryId: "c1", planned: 90 },
     { id: "i9", name: "Kahvila", categoryId: "c1", planned: 25 },
@@ -28,7 +32,23 @@ let items = $state([
     { id: "i27", name: "Kodin sisustus", categoryId: "c8", planned: 40 },
     { id: "i28", name: "Säästöön", categoryId: "c9", planned: 150 },
     { id: "i29", name: "Hätärahasto", categoryId: "c9", planned: 50 }
-  ]);
+  ];
+
+let initialItems = defaultItems;
+
+if (browser && localStorage.getItem(storageKey) != null) {
+    try {
+        initialItems = JSON.parse(localStorage.getItem(storageKey));
+    } catch {
+        initialItems = defaultItems;
+    }
+}
+
+let items = $state(initialItems);
+
+const saveItems = () => {
+    localStorage.setItem(storageKey, JSON.stringify(items));
+};
 
 const useItemState = () => {
     return {
@@ -45,16 +65,19 @@ const useItemState = () => {
                 { id: crypto.randomUUID(), name, categoryId, planned: Number(planned) || 0 },
                 ...items
             ];
+            saveItems();
         },
     
         removeItem: (id) => {
             items = items.filter(i => i.id !== id);
+            saveItems();
         },
     
         setPlanned: (id, value) => {
             items = items.map(i =>
                 i.id === id ? { ...i, planned: Number(value) || 0 } : i
             );
+            saveItems();
         },
         totalPlannedForCategory: (categoryId) => {
             return items
