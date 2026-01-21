@@ -2,6 +2,9 @@
 
 A focused budgeting prototype with a clean, calm UI. Track planned costs, record transactions, and see what remains in a single view. The main app lives at `/budget`, while `/` is a simple landing page for showcasing the project.
 
+## Live Demo
+- Deployed on Vercel and live at https://simplebudget-va.vercel.app
+
 ## Highlights
 - Monthly overview with planned, spent, and remaining totals
 - Category breakdowns with inline item editing
@@ -15,12 +18,6 @@ A focused budgeting prototype with a clean, calm UI. Track planned costs, record
 
 ## Credits
 Codex (GPT-5) was used to help refine styling and to create demo data arrays in the state files.
-
-## Getting Started
-```sh
-npm install
-npm run dev
-```
 
 ## Routes
 - `/` Landing page
